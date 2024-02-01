@@ -34,14 +34,14 @@ public class ExpressionElement {
         this.operand = operand;
     }
 
-    public boolean isOperand() {
-        return operation == null && operand != -1;
+    public boolean isOperation() {
+        return operation != null && operand == -1;
     }
 
     @NonNull
     @Override
     public String toString() {
-        if (isOperand()) return String.valueOf(operand);
-        return operation != null ? operation.toString() : "NaN";
+        if (isOperation()) return operation != null ? operation.toString() : "null";
+        return operand != -1 ? String.valueOf(operand) : "NaN";
     }
 }

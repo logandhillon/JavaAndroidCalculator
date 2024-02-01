@@ -37,9 +37,12 @@ public class Calculator {
     @SuppressLint("SetTextI18n")
     public void pushOperand(int operand) {
         expression.add(new ExpressionElement(operand));
-        if (expression.size() > 1 && expression.get(expression.size()-1).isOperand())
+
+        if (expression.size() > 2 && !expression.get(expression.size()-2).isOperation()) {
             resultDisplay.setText(resultDisplay.getText() + String.valueOf(operand));
-        else resultDisplay.setText(String.valueOf(operand));
+        } else resultDisplay.setText(String.valueOf(operand));
+
+
     }
 
     public void pushOperation(Operation operation) {
@@ -54,6 +57,6 @@ public class Calculator {
     }
 
     public void calc() {
-        // TODO: 02-01-2024
+        System.out.println(expression);
     }
 }
