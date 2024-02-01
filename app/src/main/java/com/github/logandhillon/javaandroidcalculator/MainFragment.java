@@ -31,6 +31,7 @@ import com.github.logandhillon.javaandroidcalculator.databinding.FragmentMainBin
 
 public class MainFragment extends Fragment {
     private FragmentMainBinding binding;
+    private Calculator calculator;
 
     @Nullable
     @Override
@@ -42,13 +43,31 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        calculator = new Calculator(binding.outResult, binding.outOperation);
 
-        binding.numpad1.setOnClickListener(v -> System.out.println("numpad1 pressed"));
+        binding.numpad1.setOnClickListener(v -> calculator.pushOperand(1));
+        binding.numpad2.setOnClickListener(v -> calculator.pushOperand(2));
+        binding.numpad3.setOnClickListener(v -> calculator.pushOperand(3));
+        binding.numpad4.setOnClickListener(v -> calculator.pushOperand(4));
+        binding.numpad5.setOnClickListener(v -> calculator.pushOperand(5));
+        binding.numpad6.setOnClickListener(v -> calculator.pushOperand(6));
+        binding.numpad7.setOnClickListener(v -> calculator.pushOperand(7));
+        binding.numpad8.setOnClickListener(v -> calculator.pushOperand(8));
+        binding.numpad9.setOnClickListener(v -> calculator.pushOperand(9));
+
+        binding.numpadAdd.setOnClickListener(v -> calculator.pushOperation(Operation.ADD));
+        binding.numpadSub.setOnClickListener(v -> calculator.pushOperation(Operation.SUB));
+        binding.numpadMult.setOnClickListener(v -> calculator.pushOperation(Operation.MULT));
+        binding.numpadDiv.setOnClickListener(v -> calculator.pushOperation(Operation.DIV));
+
+        binding.numpadC.setOnClickListener(v -> calculator.clear(true));
+        binding.numpadEquals.setOnClickListener(v -> calculator.calc());
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        calculator = null;
         binding = null;
     }
 }
